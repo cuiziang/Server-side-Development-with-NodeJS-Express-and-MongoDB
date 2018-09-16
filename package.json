@@ -1,0 +1,23 @@
+{
+  "name": "server-side-development-with-nodejs-express-and-mongodb",
+  "version": "1.0.0",
+  "description": "Node Express Example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuiziang/Server-side-Development-with-NodeJS-Express-and-MongoDB.git"
+  },
+  "author": "Ziang Cui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cuiziang/Server-side-Development-with-NodeJS-Express-and-MongoDB/issues"
+  },
+  "homepage": "https://github.com/cuiziang/Server-side-Development-with-NodeJS-Express-and-MongoDB#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
