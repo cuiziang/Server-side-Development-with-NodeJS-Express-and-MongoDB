@@ -7,13 +7,13 @@
   },
   "dependencies": {
     "body-parser": "latest",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~4.1.1",
+    "express": "~4.17.1",
+    "http-errors": "~1.7.3",
     "jade": "~1.11.0",
-    "mongoose": "^5.4.17",
-    "mongoose-currency": "^0.2.0",
-    "morgan": "~1.9.0"
+    "mongoose": "^4.13.18",
+    "mongoose-currency": "~0.2.0",
+    "morgan": "~1.9.1"
   }
 }
