@@ -3,4 +3,4 @@
 
 learning notes.
 
-view the course: https://www.coursera.org/learn/server-side-nodejs.
+view the course: <https://www.coursera.org/learn/server-side-nodejs>.
