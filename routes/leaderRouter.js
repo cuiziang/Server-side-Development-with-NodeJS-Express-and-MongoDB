@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Leaderships = require('../models/leaderships');
+const leaders = require('../models/leaders');
 
 
 const leaderRouter = express.Router();
@@ -9,7 +9,7 @@ leaderRouter.use(bodyParser.json());
 
 leaderRouter.route('/')
     .get((req, res, next) => {
-        Leaderships.find({})
+        leaders.find({})
             .then((leaders) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -18,7 +18,7 @@ leaderRouter.route('/')
             .catch((err) => next(err));
     })
     .post((req, res, next) => {
-        Leaderships.create(req.body)
+        leaders.create(req.body)
             .then((leader) => {
                 console.log('leader Created ', leader);
                 res.statusCode = 200;
@@ -32,7 +32,7 @@ leaderRouter.route('/')
         res.end('PUT operation not supported on /leaders');
     })
     .delete((req, res, next) => {
-        Leaderships.remove({})
+        leaders.remove({})
             .then((resp) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -43,7 +43,7 @@ leaderRouter.route('/')
 
 leaderRouter.route('/:leaderId')
     .get((req, res, next) => {
-        Leaderships.findById(req.params.leaderId)
+        leaders.findById(req.params.leaderId)
             .then((dish) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -56,7 +56,7 @@ leaderRouter.route('/:leaderId')
         res.end('POST operation not supported on /leaders/' + req.params.leaderId);
     })
     .put((req, res, next) => {
-        Leaderships.findByIdAndUpdate(req.params.leaderId, {
+        leaders.findByIdAndUpdate(req.params.leaderId, {
             $set: req.body
         }, {new: true})
             .then((leader) => {
@@ -67,7 +67,7 @@ leaderRouter.route('/:leaderId')
             .catch((err) => next(err));
     })
     .delete((req, res, next) => {
-        Leaderships.findByIdAndRemove(req.params.leaderId)
+        leaders.findByIdAndRemove(req.params.leaderId)
             .then((resp) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
