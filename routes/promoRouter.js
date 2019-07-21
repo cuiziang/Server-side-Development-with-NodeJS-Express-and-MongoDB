@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const authenticate = require('../authenticate')
 const Promotions = require('../models/promotions');
+const cors = require('./cors');
 
 
 const promoRouter = express.Router();
@@ -9,7 +10,8 @@ const promoRouter = express.Router();
 promoRouter.use(bodyParser.json());
 
 promoRouter.route('/')
-    .get((req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+    .get(cors.cors, (req, res, next) => {
         Promotions.find({})
             .then((promotions) => {
                 res.statusCode = 200;
@@ -18,7 +20,7 @@ promoRouter.route('/')
             }, (err) => next(err))
             .catch((err) => next(err));
     })
-    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    .post(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         Promotions.create(req.body)
             .then((promotion) => {
                 console.log('Dish Created ', promotion);
@@ -28,7 +30,7 @@ promoRouter.route('/')
             }, (err) => next(err))
             .catch((err) => next(err));
     })
-    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    .put(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /dishes');
     })
@@ -43,7 +45,8 @@ promoRouter.route('/')
     });
 
 promoRouter.route('/:promotionId')
-    .get((req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+    .get(cors.cors, (req, res, next) => {
         Promotions.findById(req.params.promotionId)
             .then((dish) => {
                 res.statusCode = 200;
@@ -52,11 +55,11 @@ promoRouter.route('/:promotionId')
             }, (err) => next(err))
             .catch((err) => next(err));
     })
-    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    .post(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('POST operation not supported on /dishes/' + req.params.dishId);
     })
-    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    .put(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         Promotions.findByIdAndUpdate(req.params.dishId, {
             $set: req.body
         }, {new: true})
@@ -67,7 +70,7 @@ promoRouter.route('/:promotionId')
             }, (err) => next(err))
             .catch((err) => next(err));
     })
-    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+    .delete(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         Promotions.findByIdAndRemove(req.params.dishId)
             .then((resp) => {
                 res.statusCode = 200;
